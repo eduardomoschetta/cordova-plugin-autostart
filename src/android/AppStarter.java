@@ -6,7 +6,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.SharedPreferences;
 import com.tonikorin.cordova.plugin.autostart.AutoStart;
-//import android.util.Log;
+import android.util.Log;
  
 public class AppStarter {
 
@@ -15,7 +15,7 @@ public class AppStarter {
     public void run(Context context, Intent intent, int componentState) {
 
         // Enable or Disable UserPresentReceiver (or bypass the modification)
-        //Log.d("Cordova AppStarter", "UserPresentReceiver component, new state:" + String.valueOf(componentState));
+        Log.d("Cordova AppStarter", "UserPresentReceiver component, new state:" + String.valueOf(componentState));
         if( componentState != BYPASS_USERPRESENT_MODIFICATION ) {
             ComponentName receiver = new ComponentName(context, UserPresentReceiver.class);
             PackageManager pm = context.getPackageManager();
@@ -23,12 +23,12 @@ public class AppStarter {
         }
     
         // Starting your app...
-        //Log.d("Cordova AppStarter", "STARTING APP...");
+        Log.d("Cordova AppStarter", "STARTING APP...");
         SharedPreferences sp = context.getSharedPreferences(AutoStart.PREFS, Context.MODE_PRIVATE);
         String packageName = context.getPackageName();
         String className = sp.getString(AutoStart.CLASS_NAME, "");
         if( !className.equals("") ){
-            //Log.d("Cordova AppStarter", className);
+            Log.d("Cordova AppStarter", className);
             Intent serviceIntent = new Intent();
             serviceIntent.setClassName(context, packageName + "." + className);
             serviceIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
